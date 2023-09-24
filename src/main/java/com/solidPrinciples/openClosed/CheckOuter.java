@@ -2,7 +2,7 @@ package com.solidPrinciples.openClosed;
 
 import com.solidPrinciples.openClosed.implementations.CashPayment;
 import com.solidPrinciples.openClosed.implementations.CreditCardPayment;
-import com.solidPrinciples.openClosed.interfaces.PaymentType;
+import com.solidPrinciples.openClosed.interfaces.PaymentInstrument;
 import com.solidPrinciples.openClosed.model.Item;
 import com.solidPrinciples.openClosed.model.Money;
 import com.solidPrinciples.openClosed.model.Payment;
@@ -24,7 +24,7 @@ public class CheckOuter {
         boolean withCreditCard = true;
 
         Payment payment;
-        PaymentType paymentType;
+        PaymentInstrument paymentType;
 
         if (withCreditCard) {
 
@@ -43,7 +43,7 @@ public class CheckOuter {
     }
 
     // This fixes the mess
-    public static Payment checkOut(Receipt receipt, PaymentType paymentType) {
+    public static Payment checkOut(Receipt receipt, PaymentInstrument paymentType) {
 
         Money total = Money.ZERO;
 
@@ -53,24 +53,16 @@ public class CheckOuter {
 
         }
 
-         return paymentType.acceptPayment(total);
+        return paymentType.acceptPayment(total);
 
     }
 
     // Fixed
     public static Payment checkOut_fixed(Receipt receipt) {
 
-        Money total = Money.ZERO;
-
-        for (Item item : receipt.getItems()) {
-
-            total.addValue(item.getPrice());
-
-        }
-
         boolean withCreditCard = true;
 
-        PaymentType paymentType;
+        PaymentInstrument paymentType;
 
         if (withCreditCard) {
 
@@ -82,7 +74,7 @@ public class CheckOuter {
 
         }
 
-        return paymentType.acceptPayment(total);
+        return checkOut(receipt, paymentType);
 
     }
 
