@@ -8,11 +8,15 @@ import com.solidPrinciples.liskovSubstitution.interfaces.IPaymentInstrument;
 import com.solidPrinciples.liskovSubstitution.model.CreditCard;
 import com.solidPrinciples.liskovSubstitution.model.DebitCard;
 import com.solidPrinciples.liskovSubstitution.model.OrderDetails;
+import com.solidPrinciples.liskovSubstitution.model.PaymentResponse;
 import com.solidPrinciples.openClosed.implementations.CreditCardPayment;
+import com.solidPrinciples.openClosed.interfaces.PaymentInstrument;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
-public class Tester {
+public class LiskovSubstitutionTester {
 
     public static void test() throws PaymentInstrumentInvalidException, PaymentFailedException {
 
@@ -30,6 +34,17 @@ public class Tester {
 
         // This is for LSP
         RewardsCard rewardsCard = new RewardsCard("John Doe","123");
+
+        List<IPaymentInstrument> instruments = new ArrayList<>();
+        instruments.add(debitCard);
+        instruments.add(creditCard);
+        instruments.add(rewardsCard);
+
+        for (IPaymentInstrument instrument : instruments) {
+            PaymentResponse paymentResponse = paymentProcessor.process(orderDetails, instrument);
+            System.out.println(paymentResponse.getIdentifier());
+        }
+
         paymentProcessor.process(orderDetails, rewardsCard);
 
     }

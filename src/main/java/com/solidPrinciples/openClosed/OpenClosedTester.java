@@ -8,10 +8,10 @@ import com.solidPrinciples.openClosed.model.Money;
 import com.solidPrinciples.openClosed.model.Payment;
 import com.solidPrinciples.openClosed.model.Receipt;
 
-public class CheckOuter {
+public class OpenClosedTester {
 
     // This code violates the principle.
-    public static Payment checkOut(Receipt receipt) {
+    private static Payment checkOut(Receipt receipt) {
 
         Money total = Money.ZERO;
 
@@ -43,7 +43,7 @@ public class CheckOuter {
     }
 
     // This fixes the mess
-    public static Payment checkOut(Receipt receipt, PaymentInstrument paymentType) {
+    private static Payment checkOut(Receipt receipt, PaymentInstrument paymentType) {
 
         Money total = Money.ZERO;
 

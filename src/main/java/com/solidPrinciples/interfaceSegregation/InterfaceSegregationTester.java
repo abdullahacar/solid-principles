@@ -3,7 +3,7 @@ package com.solidPrinciples.interfaceSegregation;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Tester {
+public class InterfaceSegregationTester {
 
     public static void test() {
 

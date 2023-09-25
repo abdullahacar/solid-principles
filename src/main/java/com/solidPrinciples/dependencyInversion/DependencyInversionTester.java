@@ -3,7 +3,7 @@ package com.solidPrinciples.dependencyInversion;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Tester {
+public class DependencyInversionTester {
 
     public static void test() {
 

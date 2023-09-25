@@ -8,16 +8,19 @@ import com.solidPrinciples.liskovSubstitution.model.PaymentResponse;
 
 public class PaymentProcessor {
 
-    public void process(
-            OrderDetails orderDetails,
-            IPaymentInstrument paymentInstrument) throws PaymentInstrumentInvalidException, PaymentFailedException {
+    public PaymentResponse process(OrderDetails orderDetails, IPaymentInstrument paymentInstrument) throws PaymentInstrumentInvalidException, PaymentFailedException {
+
+        PaymentResponse response = null;
+
         try {
             paymentInstrument.validate();
-            PaymentResponse response = paymentInstrument.collectPayment();
+            response = paymentInstrument.collectPayment();
             saveToDatabase(orderDetails, response.getIdentifier());
-        } catch (Exception e){
-            // exception handling
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
+        return response;
     }
 
     private void saveToDatabase(OrderDetails orderDetails, String identifier) {

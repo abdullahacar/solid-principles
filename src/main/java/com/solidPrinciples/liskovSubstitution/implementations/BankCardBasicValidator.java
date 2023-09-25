@@ -4,7 +4,12 @@ import com.solidPrinciples.liskovSubstitution.exception.PaymentInstrumentInvalid
 import com.solidPrinciples.liskovSubstitution.interfaces.IPaymentInstrumentValidator;
 
 public class BankCardBasicValidator implements IPaymentInstrumentValidator {
+
     private String name;
+
+    public BankCardBasicValidator(String name) {
+        this.name = name;
+    }
 
     @Override
     public void validate() throws PaymentInstrumentInvalidException {
